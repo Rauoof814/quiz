@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 
 // Require the autoload file
 require_once ('vendor/autoload.php');
+require_once ('model/data-layer.php');
 
 // Instantiate the F3 Base class
 $f3 = Base::instance();
@@ -28,41 +29,34 @@ $f3->route('GET /', function() {
 $f3->route('GET|POST /survey', function ($f3)
 {
 
-    // Check if the for has been posted
-//    if ($_SERVER['REQUEST METHOD'] == 'POST')
-//        {
-//            echo "'POST' method was used ;)";
-//        }
-//    else
-//    {
-//        echo "'GET' method was used :)";
-//    }
+    // If the form has been posted
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-
-
-        // Get the data
-        $pet = $_POST['pet'];
-        $color = $_POST['color'];
-
-        // Validate the data
-        if (empty($pet))
-        {
-            // Data is invalid
-            echo "Please supply a pet type :)";
-        }
+        //var_dump($_POST);
+        // Get the data from the post array
+        if (isset($_POST['surv']))
+            $surveys = implode(", ", $_POST['surv']);
         else
-        {
-            // Data is valid
-            $f3->set('SESSION.pet', $pet);
-            $f3->set('SESSION.color', $color);
+            $surveys = "None selected";
 
-            //**** Add the color of the session
-            //Redirect to the summary route
-            $f3->reroute("summary");
+        // If the data valid
+        if (true) {
+
+            // Add the data to the session array
+            $f3->set('SESSION.surveys', $surveys);
+
+            // Send the user to the next form
+            $f3->reroute('summary');
+        } else {
+            // Temporary
+            echo "<p>Validation errors</p>";
         }
     }
+
+
+    // Get the data from the model
+    $surv = getSurvey();
+    $f3->set('surv', $surv);
 
     $view = new Template();
     echo $view->render('views/survey.html');

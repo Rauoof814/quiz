@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+    <body>
+
+    <div class="container">
+        <h1>My Diner</h1>
+        <h2>Order Part 1</h2>
+
+        <form action="#" method="post" class="form-horizontal">
+
+            <!-- get food -->
+            <div class="form-group">
+                <label for="name" class="col-sm-4 control-label">Name</label>
+                <div class="col-sm-4"><input class="form-control" type="text"
+                                             name="name" id="name" ></div>
+
+
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Check all that apply:</label>
+                <div class="col-sm-4">
+
+                    <repeat group="{{ @surv }}" value="{{ @surveys }}">
+                        <label><input type="checkbox" name="surv[]" value="{{ @surveys }}">{{ ucfirst(@surveys) }}</label><br>
+                    </repeat>
+
+                </div>
+
+
+            </div>
+            <br>
+
+            <!-- submit button -->
+            <div class="col-xs-3 ">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </form>
+
+    </div>
+    </body>
+</html>
