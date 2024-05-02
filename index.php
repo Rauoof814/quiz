@@ -32,6 +32,15 @@ $f3->route('GET|POST /survey', function ($f3)
     // If the form has been posted
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
+
+        // Capture userName from the POST request
+        $userName = isset($_POST['userName']) ? $_POST['userName'] : 'Anonymous';
+
+        // Set it into the session
+        $f3->set('SESSION.userName', $userName);
+
+
+
         //var_dump($_POST);
         // Get the data from the post array
         if (isset($_POST['surv']))
@@ -70,7 +79,7 @@ $f3->route('GET /summary', function () {
 
     // Render a view page
     $view = new Template();
-    echo $view->render('views/order-summary.html');
+    echo $view->render('views/summary.html');
 });
 
 
