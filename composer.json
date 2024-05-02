@@ -1,0 +1,15 @@
+{
+
+  "name": "arahmani/328/week4",
+  "authors": [
+
+    {
+      "name": "Abdul Rahmani",
+      "email": "rahmani.abdul@student.greenriver.edu"
+    }
+  ],
+  "require":
+  {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
